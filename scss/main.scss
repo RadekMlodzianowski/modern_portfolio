@@ -1,89 +1,91 @@
-@import 'config';
-@import 'menu';
+@import "config";
+@import "menu";
+@import "mobile";
 
-*{ // padding nie będzie obcinało elementów:
-    box-sizing: border-box;
+* {
+  // padding nie będzie obcinało elementów:
+  box-sizing: border-box;
 }
 
-body{
-    @include background();
-    background: $primary-color;
-    color: #fff;
-    height: 100%;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    // Odległość pomiędzy liniami:
-    line-height: 1.5;
+body {
+  @include background();
+  background: $primary-color;
+  color: #fff;
+  height: 100%;
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  // Odległość pomiędzy liniami:
+  line-height: 1.5;
 }
 
 // Headings
-h1, h2, h3{
-    margin: 0;
-    font-weight: 400;
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-weight: 400;
 
-    // Dodajemy "&" przed bo .lg-heading nie jest w elemencie h1, h2, h3 jako children tylko h1, h2, h3 (w zasadzie h1) zawiera klasę .lg-heading
+  // Dodajemy "&" przed bo .lg-heading nie jest w elemencie h1, h2, h3 jako children tylko h1, h2, h3 (w zasadzie h1) zawiera klasę .lg-heading
 
-    // To nestowanie CSS jest możliwe dzięki SASS
-    &.lg-heading{
-        // rem dziedziczy po elemencie root czyli po html, a element html ma domyślinie 16px, więc 6x16=96px
-        font-size: 6rem;
-    }
+  // To nestowanie CSS jest możliwe dzięki SASS
+  &.lg-heading {
+    // rem dziedziczy po elemencie root czyli po html, a element html ma domyślinie 16px, więc 6x16=96px
+    font-size: 6rem;
+  }
 
-    &.sm-heading{
-        margin-bottom: 2rem;
-        // padding 0.2 rem top i bottom, 1 rem left i right
-        padding: 0.2rem 1rem;
-        // rozjaśniamy -> lighten jest właściwością SASS (bierze kolor i wartość rozjaśnienia jako parametry)
-        // wstawiamy to wszystko w rgba żeby móc ustawić opacity, żeby widzieć tło(img) pod tym tłem
-        background: rgba(lighten($primary-color, 2), 0.5);
-    }
-    
+  &.sm-heading {
+    margin-bottom: 2rem;
+    // padding 0.2 rem top i bottom, 1 rem left i right
+    padding: 0.2rem 1rem;
+    // rozjaśniamy -> lighten jest właściwością SASS (bierze kolor i wartość rozjaśnienia jako parametry)
+    // wstawiamy to wszystko w rgba żeby móc ustawić opacity, żeby widzieć tło(img) pod tym tłem
+    background: rgba(lighten($primary-color, 2), 0.5);
+  }
 }
 
 a {
-    color: #fff;
-    text-decoration: none;
+  color: #fff;
+  text-decoration: none;
 }
 
-header{
-    // header (potrójny guzik) ma zawsze być na górze więc jego position musi być fixed
-    position: fixed;
-    // im większy z-index tym "bliżej monitora" jest obiekt (ułożone są warstwowo)
-    z-index: 2;
-    width: 100%;
+header {
+  // header (potrójny guzik) ma zawsze być na górze więc jego position musi być fixed
+  position: fixed;
+  // im większy z-index tym "bliżej monitora" jest obiekt (ułożone są warstwowo)
+  z-index: 2;
+  width: 100%;
 }
 
-.text-secondary{
-    color: $secondary-color;
+.text-secondary {
+  color: $secondary-color;
 }
 
-main{
-    padding: 4rem;
-    height: 100%;
+main {
+  padding: 4rem;
+  height: 100%;
 
-    // Ikony w klasie main jako childreny:
-    .icons{
-        margin-top: 1rem;
-        
-        a{
-            padding: 0.4rem;
+  // Ikony w klasie main jako childreny:
+  .icons {
+    margin-top: 1rem;
 
-            &:hover{
-                color: $secondary-color;                
-                @include easeOut();
-            }
-        }
+    a {
+      padding: 0.4rem;
+
+      &:hover {
+        color: $secondary-color;
+        @include easeOut();
+      }
     }
+  }
 
-    &#home{
-        // nie chcemy suwaków, dlatego overflow hidden
-        overflow: hidden;
+  &#home {
+    // nie chcemy suwaków, dlatego overflow hidden
+    overflow: hidden;
 
-        h1{
-            // vh to viewport height, tutaj odległość to 20 ze 100 jednostek ułożonych poziomo
-            // odwrotnością jest vw - viewport width, gdzie 100 jednostek ułożonych jest poziomo
-            margin-top: 20vh;
-        }
+    h1 {
+      // vh to viewport height, tutaj odległość to 20 ze 100 jednostek ułożonych poziomo
+      // odwrotnością jest vw - viewport width, gdzie 100 jednostek ułożonych jest poziomo
+      margin-top: 20vh;
     }
+  }
 }
-

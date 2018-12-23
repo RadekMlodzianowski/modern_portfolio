@@ -5,39 +5,68 @@ $home-image: url(../img/background.jpg);
 $background-opacity: 0.9;
 
 // mixiny działają podobnie do funkcji
-@mixin easeOut{
-    // Transition -> najpierw wybieramy co z tego elementu chcemy zmienić, potem ile zajmie to czasu i na końcu tempo zmiany
-    transition: all 0.5s ease-out;    
+@mixin easeOut {
+  // Transition -> najpierw wybieramy co z tego elementu chcemy zmienić, potem ile zajmie to czasu i na końcu tempo zmiany
+  transition: all 0.5s ease-out;
 }
 
-@mixin background{
-    // jeśli show-home-image jest true:
-    @if $show-home-image{
-        // "&#bg-img" zadziała bo ten mixin jest w body, wtedy id bg-img definiujemy następująco:
-        &#bg-img{
-            background: $home-image;
-            // obrazek-tło nie scrolluje się razem ze stroną:
-            background-attachment: fixed;
-            // jeden obrazek-tło rozciągnięty na cały ekran
-            background-size: cover;
+@mixin background {
+  // jeśli show-home-image jest true:
+  @if $show-home-image {
+    // "&#bg-img" zadziała bo ten mixin jest w body, wtedy id bg-img definiujemy następująco:
+    &#bg-img {
+      background: $home-image;
+      // obrazek-tło nie scrolluje się razem ze stroną:
+      background-attachment: fixed;
+      // jeden obrazek-tło rozciągnięty na cały ekran
+      background-size: cover;
 
-            // after jest elementem, który nakładamy na #bg-img, w ten sposób nie musimy modyfikować pliku html -> ten efekt daje przyciemienie tła
-            &:after{
-                // nie dodajemy żadnego kontentu, tylko samą właściwość tła
-                content: '';
-                // pokrywamy wszystko
-                position: absolute; 
-                // wyznaczamy nową pozycję:
-                top: 0;
-                right: 0; 
-                // idziemy w bok i w dół o 100%:
-                width: 100%;
-                height: 100%;  
-                // ustawiamy z-index żeby nie przykrywać tekstu tylko samo tło
-                z-index: -1;
-                // ustawiamy tło-przyciemnienie
-                background: rgba($primary-color, $background-opacity);
-            }
-        }
+      // after jest elementem, który nakładamy na #bg-img, w ten sposób nie musimy modyfikować pliku html -> ten efekt daje przyciemienie tła
+      &:after {
+        // nie dodajemy żadnego kontentu, tylko samą właściwość tła
+        content: "";
+        // pokrywamy wszystko
+        position: absolute;
+        // wyznaczamy nową pozycję:
+        top: 0;
+        right: 0;
+        // idziemy w bok i w dół o 100%:
+        width: 100%;
+        height: 100%;
+        // ustawiamy z-index żeby nie przykrywać tekstu tylko samo tło
+        z-index: -1;
+        // ustawiamy tło-przyciemnienie
+        background: rgba($primary-color, $background-opacity);
+      }
     }
+  }
+}
+
+// Media Query Mixins
+@mixin mediaSm {
+  //jeśli screen ma 500px lub mniej:
+  @media screen and (max-width: 500px) {
+    @content;
+  }
+}
+
+@mixin mediaMd {
+  //jeśli screen ma 768px lub mniej:
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin mediaLg {
+  //jeśli screen ma 769 - 1170px:
+  @media screen and (min-width: 769px) and (max-width: 1170px) {
+    @content;
+  }
+}
+
+@mixin mediaXl {
+  //jeśli screen ma 1171px lub więcej:
+  @media screen and (min-width: 1171px) {
+    @content;
+  }
 }
