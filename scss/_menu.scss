@@ -34,6 +34,122 @@
                 transform: rotate(-45deg)translate(7px, -6px);
             }   
         }
-
     }
 }
+
+// Menu Overlay
+.menu{
+    position: fixed;
+    top: 0;
+    width: 100%;
+    // opacity żeby widzieć co jest pod menu -> nie jest konieczne ale fajnie wygląda
+    opacity: 0.9;
+    visibility: hidden;
+
+    &.show{
+        visibility: visible;            
+    }
+
+    // zamiast .menu-branding można napisać &-branding:
+    // zamiast .menu-nav można napisać &-nav:
+
+    // tutaj znak & działa już inaczej !!! NIE TRZEBA STOSOWAĆ TEGO ZAPISU
+    &-branding, 
+    &-nav{
+        display: flex;
+        flex-flow: column wrap;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        width: 50%;
+        height: 100vh;
+        overflow: hidden;        
+    }
+
+    // to jest .menu-nav, czyli element ul (patrz html):
+    &-nav{
+        margin: 0;
+        padding: 0;
+        // darken() to funkcja SASS do przyciemniania
+        background: darken($primary-color, 5);
+        list-style: none;
+        // Element schowany na górze, niewidoczny:
+        transform: translate3d(0, -100%, 0);
+        @include easeOut;
+
+        &.show{
+            // Gdy dodana jest klasa show, element zjeżdża z góry:
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+    // Branding Site
+    // wybieramy .menu-branding:
+    &-branding{
+        background: $primary-color;
+        // Element schowany na dole, niewidoczny:
+        transform: translate3d(0, 100%, 0);
+        @include easeOut;
+        
+        &.show{
+            // Gdy dodana jest klasa show, element pojawia się z dołu:
+            transform: translate3d(0, 0, 0);
+        }
+
+        .portrait{
+            width: 250px;
+            height: 250px;
+            background: url('../img/portrait.jpg');
+            border-radius: 50%;
+            border: solid 3px $secondary-color;
+        }
+    }
+
+    // .nav-item to element li
+    .nav-item{
+        transform: translate3d(600px, 0, 0);
+        @include easeOut;
+
+        &.show{
+            // Gdy dodana jest klasa show, element pojawia się z prawej:
+            transform: translate3d(0, 0, 0);
+        }
+
+        // link a dla którego parentem jest current
+        &.current > a{
+            color: $secondary-color;
+        }
+    }
+
+    // .nav-link to element a
+    .nav-link{
+        // inline-block żeby np. można było manipulować padding, element "a" domyślnie ma ustawione display na inline, musimy to zmienić
+        display: inline-block;
+        // relative potrzebne tu?
+        position: relative;
+        font-size: 30px;
+        text-transform: uppercase;
+        // 1 top i bottom, 0 left i right
+        padding: 1rem 0;
+        font-weight: 300;
+        color: #fff;
+        text-decoration: none;
+        @include easeOut;
+
+        &:hover{
+            color: $secondary-color;
+        }
+    }
+}
+
+// Delay each nav item slide by 0.1s (bo pojawiają się ukośnie)
+
+// ten zapis oznacza praktycznie to: "for(let x = 0; x < 4; x++)" jest to pętla zapisana w SASS
+// zmienną musimy zapisać lierałem dlatego "#{$x}"
+@for $x from 1 through 4 {
+    .nav-item:nth-child(#{$x}){
+        // każdy item będzie pojawiał się trochę poźniej od poprzedniego
+        transition-delay: $x * 0.1s;
+    }
+}
+

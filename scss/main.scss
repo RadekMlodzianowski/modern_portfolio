@@ -48,7 +48,7 @@ a {
 header{
     // header (potrójny guzik) ma zawsze być na górze więc jego position musi być fixed
     position: fixed;
-    // im większy z-index tym bliżej monitora jest obiekt (ułożone są warstwowo)
+    // im większy z-index tym "bliżej monitora" jest obiekt (ułożone są warstwowo)
     z-index: 2;
     width: 100%;
 }
