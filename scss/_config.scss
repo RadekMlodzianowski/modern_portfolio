@@ -42,6 +42,15 @@ $background-opacity: 0.9;
   }
 }
 
+// Set Text Color
+@function set-text-color($color){
+  @if(lightness($color) > 40){
+    @return #000;
+  } @else {
+    @return #fff;
+  }
+}
+
 // Media Query Mixins
 @mixin mediaSm {
   //jeśli screen ma 500px lub mniej:
@@ -53,7 +62,7 @@ $background-opacity: 0.9;
 @mixin mediaMd {
   //jeśli screen ma 768px lub mniej:
   @media screen and (max-width: 768px) {
-    @content;
+    @content;    
   }
 }
 
